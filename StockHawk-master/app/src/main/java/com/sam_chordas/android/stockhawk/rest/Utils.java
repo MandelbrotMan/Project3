@@ -31,7 +31,11 @@ public class Utils {
         if (count == 1){
           jsonObject = jsonObject.getJSONObject("results")
                   .getJSONObject("quote");
-          batchOperations.add(buildBatchOperation(jsonObject));
+          if(!TestOperationSingle(jsonObject).equals("null")){
+            batchOperations.add(buildBatchOperation(jsonObject));
+          }
+
+
         } else{
           resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
 
@@ -55,27 +59,7 @@ public class Utils {
     }
     return batchOperations;
   }
-  public boolean testNewEntry(String JSON){
-    JSONObject jsonObject = null;
-    JSONArray resultsArray = null;
-    boolean validity = false;
-    try{
-      jsonObject = new JSONObject(JSON);
-      if (jsonObject != null && jsonObject.length() != 0){
-        jsonObject = jsonObject.getJSONObject("query");
-        int count = Integer.parseInt(jsonObject.getString("count"));
-        if (count == 1){
-          jsonObject = jsonObject.getJSONObject("results")
-                  .getJSONObject("quote");
-          validity = true;
-          buildBatchOperation(jsonObject);
-        }
-      }
-    } catch (JSONException e){
-      Log.e(LOG_TAG, "String to JSON failed: " + e);
-    }
-    return validity;
-  }
+
 
   public static String truncateBidPrice(String bidPrice){
     bidPrice = String.format("%.2f", Float.parseFloat(bidPrice));
@@ -120,6 +104,17 @@ public class Utils {
       e.printStackTrace();
     }
     return builder.build();
+  }
+  public static String TestOperationSingle(JSONObject jsonObject){
+    ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
+            QuoteProvider.Quotes.CONTENT_URI);
+    String change = "NoData";
+    try {
+      change = jsonObject.getString("Change");
+    } catch (JSONException e){
+      e.printStackTrace();
+    }
+    return change;
   }
 
 

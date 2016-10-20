@@ -10,6 +10,9 @@
   <string name="input_hint">FB</string>
   <string name="input_prefill"></string>
   <string name="network_toast">Uh-oh! This app requires an internet connection</string>
-
   <string name="activity_detail"> Details </string>
+  <string name="add_button">Search new stock button</string>
+  <string name="ph_percent_change" translatable="false">100%</string>
+  <string name="ph_default_stock"> GOOG</string>
+  <string name="ph_value" translatable="false">1000.00</string>
 </resources>
