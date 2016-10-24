@@ -118,6 +118,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                     mServiceIntent.putExtra("tag", "add");
                     mServiceIntent.putExtra("symbol", input.toString());
                     startService(mServiceIntent);
+
                   }
                 }
               })
@@ -221,6 +222,13 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
   @Override
   public void onLoaderReset(Loader<Cursor> loader){
     mCursorAdapter.swapCursor(null);
+  }
+  public void notifyInvalid(){
+    Toast toast =
+            Toast.makeText(MyStocksActivity.this, "This stock name is invalid!",
+                    Toast.LENGTH_LONG);
+    toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
+    toast.show();
   }
 
 }

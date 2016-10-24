@@ -34,15 +34,19 @@ public class StockDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         final String SQL_CREATE_STOCK_TABLE = "CREATE TABLE " + StockEntry.TABLE_NAME + " (" +
                 StockEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                StockEntry.COLUMN_STOCK_NAME + " TEXT NOT NULL, " +
+                StockEntry.COLUMN_STOCK_SYMBOL + " TEXT NOT NULL, " +
                 StockEntry.COLUMN_TIME + " TEXT NOT NULL, " +
-                StockEntry.COLUMN_CHANGE + " TEXT NOT NULL, " +
-                StockEntry.COLUMN_CURRENT_VALUE + " TEXT NOT NULL," +
-                StockEntry.COLUMN_DIRECTION + " TEXT NOT NULL " +
+                StockEntry.COLUMN_PERCENT_CHANGE + " TEXT NOT NULL, " +
+                StockEntry.COLUMN_CHANGE + " TEXT NOT NULL," +
+                StockEntry.COLUMN_BIDPRICE + " TEXT NOT NULL," +
+                StockEntry.COLUMN_CREATED + " TEXT NOT NULL," +
+                StockEntry.COLUMN_ISUP + " INTEGER NOT NULL," +
+                StockEntry.COLUMN_ISCURRENT + " INTEGER NOT NULL " +
                 ");";
         sqLiteDatabase.execSQL(SQL_CREATE_STOCK_TABLE);
     }

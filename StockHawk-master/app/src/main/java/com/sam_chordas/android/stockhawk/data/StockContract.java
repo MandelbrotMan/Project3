@@ -20,6 +20,9 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import net.simonvt.schematic.annotation.DataType;
+import net.simonvt.schematic.annotation.NotNull;
+
 /**
  * Defines table and column names for the weather database.
  */
@@ -57,16 +60,20 @@ public class StockContract {
         // Table name
         public static final String TABLE_NAME = "stock";
 
-        public static final String COLUMN_STOCK_NAME = "stock_name";
+        public static final String COLUMN_STOCK_SYMBOL = "symbol";
 
         public static final String COLUMN_TIME = "time";
 
+        public static final String COLUMN_PERCENT_CHANGE = "percent_change";
+
         public static final String COLUMN_CHANGE = "change";
 
-        public static final String COLUMN_CURRENT_VALUE = "current_value";
+        public static final String COLUMN_BIDPRICE = "bid_price";
 
-        //Negative or postive
-        public static final String COLUMN_DIRECTION = "direction";
+        public static final String COLUMN_CREATED = "created";
+        public static final String COLUMN_ISUP = "is_up";
+        public static final String COLUMN_ISCURRENT = "is_current";
+
 
 
         public static Uri buildStockUri(long id) {
