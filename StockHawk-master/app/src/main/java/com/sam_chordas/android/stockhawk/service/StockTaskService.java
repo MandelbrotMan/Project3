@@ -67,10 +67,10 @@ public class StockTaskService extends GcmTaskService{
     }
     if (params.getTag().equals("init") || params.getTag().equals("periodic")){
       isUpdate = true;
-      initQueryCursor = mContext.getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
-          new String[] { "Distinct " + QuoteColumns.SYMBOL }, null,
+      initQueryCursor = mContext.getContentResolver().query(StockContract.StockEntry.CONTENT_URI,
+          new String[] {StockContract.StockEntry.COLUMN_STOCK_SYMBOL }, null,
           null, null);
-      if (initQueryCursor.getCount() == 0 || initQueryCursor == null){
+      if (initQueryCursor == null){
         // Init task. Populates DB with quotes for the symbols seen below
         try {
           urlStringBuilder.append(
@@ -86,7 +86,7 @@ public class StockTaskService extends GcmTaskService{
               initQueryCursor.getString(initQueryCursor.getColumnIndex("symbol"))+"\",");
           initQueryCursor.moveToNext();
         }
-        mStoredSymbols.replace(mStoredSymbols.length() - 1, mStoredSymbols.length(), ")");
+        //mStoredSymbols.replace(mStoredSymbols.length() - 1, mStoredSymbols.length(), ")");
         try {
           urlStringBuilder.append(URLEncoder.encode(mStoredSymbols.toString(), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
@@ -122,8 +122,10 @@ public class StockTaskService extends GcmTaskService{
         // update ISCURRENT to 0 (false) so new data is current
         if (isUpdate){
           contentValues.put(QuoteColumns.ISCURRENT, 0);
+
           mContext.getContentResolver().update(StockContract.StockEntry.CONTENT_URI, contentValues,
               null, null);
+
        }
         ArrayList<ContentValues> valuesArrayList = Utils.quoteJsonToContentVals(getResponse,mContext);
         ContentValues fromJson[] = new ContentValues[valuesArrayList.size()];

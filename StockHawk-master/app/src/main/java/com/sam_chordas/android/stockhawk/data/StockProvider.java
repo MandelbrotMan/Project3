@@ -30,8 +30,9 @@ public class StockProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private StockDbHelper mOpenHelper;
 
-    static final int MOVIE = 100;
-    static final int TRAILER = 300;
+    static final int STOCK = 100;
+
+
 
     private static final SQLiteQueryBuilder MovieQueryBuilder;
 
@@ -52,8 +53,9 @@ public class StockProvider extends ContentProvider {
         final String authority = StockContract.CONTENT_AUTHORITY;
 
 
-        matcher.addURI(authority, StockContract.PATH_MOVIE, MOVIE);
-        matcher.addURI(authority, StockContract.PATH_TRAILER, TRAILER);
+        //CHANGE
+        matcher.addURI(authority, StockContract.PATH_STOCK, STOCK);
+
         return matcher;
     }
 
@@ -72,7 +74,7 @@ public class StockProvider extends ContentProvider {
 
         switch (match) {
 
-            case MOVIE:
+            case STOCK:
                 return StockContract.StockEntry.CONTENT_TYPE;
 
             default:
@@ -87,7 +89,7 @@ public class StockProvider extends ContentProvider {
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
 
-            case MOVIE: {
+            case STOCK: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
                        StockContract.StockEntry.TABLE_NAME,
                         projection,
@@ -115,7 +117,7 @@ public class StockProvider extends ContentProvider {
         Uri returnUri;
 
         switch (match) {
-            case MOVIE: {
+            case STOCK: {
                 long _id = db.insert(StockContract.StockEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
                     returnUri = StockContract.StockEntry.buildStockUri(_id);
@@ -138,14 +140,14 @@ public class StockProvider extends ContentProvider {
 
         if (null == selection) selection = "1";
         switch (match) {
-            case MOVIE:
+            case STOCK:
                 rowsDeleted = db.delete(
                         StockContract.StockEntry.TABLE_NAME, selection, selectionArgs);
                 break;
-            case TRAILER:
+            /*case TRAILER:
                 rowsDeleted = db.delete(
                         StockContract.StockEntry.TABLE_NAME, selection, selectionArgs);
-                break;
+                break;*/
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -163,14 +165,14 @@ public class StockProvider extends ContentProvider {
         int rowsUpdated;
 
         switch (match) {
-            case MOVIE:
+            case STOCK:
                 rowsUpdated = db.update(StockContract.StockEntry.TABLE_NAME, values, selection,
                         selectionArgs);
                 break;
-            case TRAILER:
+           /* case TRAILER:
                 rowsUpdated = db.update(StockContract.StockEntry.TABLE_NAME, values, selection,
                         selectionArgs);
-                break;
+                break;*/
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -185,7 +187,7 @@ public class StockProvider extends ContentProvider {
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
         switch (match) {
-            case MOVIE:
+            case STOCK:
                 db.beginTransaction();
                 int returnCount = 0;
                 try {
@@ -201,7 +203,7 @@ public class StockProvider extends ContentProvider {
                 }
                 getContext().getContentResolver().notifyChange(uri, null);
                 return returnCount;
-            case TRAILER:
+            /*case TRAILER:
                 db.beginTransaction();
                 int returnCountTrailer = 0;
                 try {
@@ -216,7 +218,7 @@ public class StockProvider extends ContentProvider {
                     db.endTransaction();
                 }
                 getContext().getContentResolver().notifyChange(uri, null);
-                return returnCountTrailer;
+                return returnCountTrailer;*/
             default:
                 return super.bulkInsert(uri, values);
         }

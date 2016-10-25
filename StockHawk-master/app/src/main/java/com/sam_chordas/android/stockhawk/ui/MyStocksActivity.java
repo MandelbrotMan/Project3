@@ -1,6 +1,7 @@
 package com.sam_chordas.android.stockhawk.ui;
 
 import android.app.LoaderManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -96,7 +97,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     fab.attachToRecyclerView(recyclerView);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        if (isConnected){
+       /* if (isConnected){
           new MaterialDialog.Builder(mContext).title(R.string.symbol_search)
               .content(R.string.content_test)
               .inputType(InputType.TYPE_CLASS_TEXT)
@@ -126,7 +127,28 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
               .show();
         } else {
           networkToast();
-        }
+        }*/
+        ContentValues values = new ContentValues();
+          String change = "Test";
+/*        StockContract.StockEntry.COLUMN_STOCK_SYMBOL + " TEXT NOT NULL, " +
+                StockContract.StockEntry.COLUMN_NAME + " TEXT NOT NULL, " +
+                StockContract.StockEntry.COLUMN_TIME + " TEXT NOT NULL, " +
+                StockContract.StockEntry.COLUMN_PERCENT_CHANGE + " TEXT NOT NULL, " +
+                StockContract.StockEntry.COLUMN_CHANGE + " TEXT NOT NULL," +
+                StockContract.StockEntry.COLUMN_BIDPRICE + " TEXT NOT NULL," +
+                StockContract.StockEntry.COLUMN_CREATED + " TEXT NOT NULL," +
+                StockContract.StockEntry.COLUMN_ISUP + " INTEGER NOT NULL," +
+                StockContract.StockEntry.COLUMN_ISCURRENT + " INTEGER NOT NULL " +*/
+          values.put(StockContract.StockEntry.COLUMN_CREATED, "Test");
+          values.put(StockContract.StockEntry.COLUMN_TIME, "Test");
+          values.put(StockContract.StockEntry.COLUMN_NAME, "Test");
+          values.put(StockContract.StockEntry.COLUMN_STOCK_SYMBOL, "Test");
+          values.put(StockContract.StockEntry.COLUMN_BIDPRICE, "Test");
+          values.put(StockContract.StockEntry.COLUMN_PERCENT_CHANGE,"Test");
+          values.put(StockContract.StockEntry.COLUMN_CHANGE,"Test");
+          values.put(StockContract.StockEntry.COLUMN_ISCURRENT, 1);
+          values.put(StockContract.StockEntry.COLUMN_ISUP, 0);
+          getBaseContext().getContentResolver().insert(StockContract.StockEntry.CONTENT_URI, values);
 
       }
     });
