@@ -29,12 +29,14 @@ public class Utils {
   public static boolean valid = false;
 
   public static ArrayList quoteJsonToContentVals(String JSON, Context context){
-    ArrayList<ContentProviderOperation> batchOperations = new ArrayList<>();
+    ArrayList<ContentValues> batchOperations = new ArrayList<>();
     JSONObject jsonObject = null;
     JSONArray resultsArray = null;
     Log.v("Json Url: ", JSON);
     try{
       jsonObject = new JSONObject(JSON);
+
+      //single entry
       if (jsonObject != null && jsonObject.length() != 0){
         jsonObject = jsonObject.getJSONObject("query");
         int count = Integer.parseInt(jsonObject.getString("count"));
@@ -48,7 +50,9 @@ public class Utils {
             valid = false;
           }
 
-        } else{
+        }
+        //Searching for all values in db
+        else{
           resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
 
           if (resultsArray != null && resultsArray.length() != 0){
