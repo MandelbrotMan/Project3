@@ -12,6 +12,7 @@ import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
+import com.sam_chordas.android.stockhawk.data.StockContract;
 import com.sam_chordas.android.stockhawk.rest.Utils;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -121,7 +122,7 @@ public class StockTaskService extends GcmTaskService{
           // update ISCURRENT to 0 (false) so new data is current
           if (isUpdate){
             contentValues.put(QuoteColumns.ISCURRENT, 0);
-            mContext.getContentResolver().update(QuoteProvider.Quotes.CONTENT_URI, contentValues,
+            mContext.getContentResolver().update(StockContract.StockEntry.CONTENT_URI, contentValues,
                 null, null);
          }
          mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,

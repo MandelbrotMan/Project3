@@ -24,6 +24,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
+import com.sam_chordas.android.stockhawk.data.StockContract;
 import com.sam_chordas.android.stockhawk.rest.QuoteCursorAdapter;
 import com.sam_chordas.android.stockhawk.rest.RecyclerViewItemClickListener;
 import com.sam_chordas.android.stockhawk.rest.Utils;
@@ -205,10 +206,10 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args){
     // This narrows the return to only the stocks that are most current.
-    return new CursorLoader(this, QuoteProvider.Quotes.CONTENT_URI,
-        new String[]{ QuoteColumns._ID, QuoteColumns.SYMBOL, QuoteColumns.BIDPRICE,
-            QuoteColumns.PERCENT_CHANGE, QuoteColumns.CHANGE, QuoteColumns.ISUP},
-        QuoteColumns.ISCURRENT + " = ?",
+    return new CursorLoader(this, StockContract.StockEntry.CONTENT_URI,
+        new String[]{ StockContract.StockEntry._ID, StockContract.StockEntry.COLUMN_STOCK_SYMBOL, StockContract.StockEntry.COLUMN_BIDPRICE,
+                StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_ISUP},
+            StockContract.StockEntry.COLUMN_ISCURRENT + " = ?",
         new String[]{"1"},
         null);
   }

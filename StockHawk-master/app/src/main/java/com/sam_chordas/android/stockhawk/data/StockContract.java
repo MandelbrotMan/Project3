@@ -61,6 +61,7 @@ public class StockContract {
         public static final String TABLE_NAME = "stock";
 
         public static final String COLUMN_STOCK_SYMBOL = "symbol";
+        public static final String COLUMN_NAME = "name";
 
         public static final String COLUMN_TIME = "time";
 
@@ -71,6 +72,7 @@ public class StockContract {
         public static final String COLUMN_BIDPRICE = "bid_price";
 
         public static final String COLUMN_CREATED = "created";
+
         public static final String COLUMN_ISUP = "is_up";
         public static final String COLUMN_ISCURRENT = "is_current";
 

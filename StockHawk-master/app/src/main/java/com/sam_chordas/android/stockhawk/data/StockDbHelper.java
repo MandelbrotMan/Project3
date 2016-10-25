@@ -40,6 +40,7 @@ public class StockDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_STOCK_TABLE = "CREATE TABLE " + StockEntry.TABLE_NAME + " (" +
                 StockEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 StockEntry.COLUMN_STOCK_SYMBOL + " TEXT NOT NULL, " +
+                StockEntry.COLUMN_NAME + " TEXT NOT NULL, " +
                 StockEntry.COLUMN_TIME + " TEXT NOT NULL, " +
                 StockEntry.COLUMN_PERCENT_CHANGE + " TEXT NOT NULL, " +
                 StockEntry.COLUMN_CHANGE + " TEXT NOT NULL," +

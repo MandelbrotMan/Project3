@@ -1,14 +1,17 @@
 package com.sam_chordas.android.stockhawk.rest;
 
+import android.content.ContentProvider;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+
 import android.util.Log;
 import android.widget.Toast;
 
-import com.sam_chordas.android.stockhawk.data.QuoteColumns;
-import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.data.StockContract;
+import com.sam_chordas.android.stockhawk.data.StockDbHelper;
+import com.sam_chordas.android.stockhawk.data.StockProvider;
 
 import java.util.ArrayList;
 import org.json.JSONArray;
@@ -92,11 +95,9 @@ public class Utils {
     return change;
   }
 
-  public static ContentProviderOperation buildBatchOperation(JSONObject jsonObject){
-    ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
-            QuoteProvider.Quotes.CONTENT_URI);
+  public static ContentValues buildBatchOperation(JSONObject jsonObject){
+    ContentValues values = new ContentValues();
     try {
-      ContentValues values = new ContentValues();
       String change = jsonObject.getString("Change");
       values.put(StockContract.StockEntry.COLUMN_STOCK_SYMBOL, jsonObject.getString("symbol"));
       values.put(StockContract.StockEntry.COLUMN_BIDPRICE, truncateBidPrice(jsonObject.getString("Bid")));
@@ -104,19 +105,19 @@ public class Utils {
               jsonObject.getString("ChangeinPercent"), true));
       values.put(StockContract.StockEntry.COLUMN_CHANGE,truncateChange(change, false));
       values.put(StockContract.StockEntry.COLUMN_ISCURRENT, 1);
+
       if (change.charAt(0) == '-'){
         values.put(StockContract.StockEntry.COLUMN_ISUP, 0);
       }else{
         values.put(StockContract.StockEntry.COLUMN_ISUP, 1);
       }
+
     } catch (JSONException e){
       e.printStackTrace();
     }
-    return builder.build();
+    return values;
   }
   public static String TestOperationSingle(JSONObject jsonObject){
-    ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
-            QuoteProvider.Quotes.CONTENT_URI);
     String change = "NoData";
     try {
       change = jsonObject.getString("Change");
