@@ -13,7 +13,10 @@ import com.sam_chordas.android.stockhawk.data.StockContract;
 import com.sam_chordas.android.stockhawk.data.StockDbHelper;
 import com.sam_chordas.android.stockhawk.data.StockProvider;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -88,25 +91,29 @@ public class Utils {
     if (isPercentChange){
       ampersand = change.substring(change.length() - 1, change.length());
       change = change.substring(0, change.length() - 1);
+    }else {
+      change = change.substring(1, change.length());
+      double round = (double) Math.round(Double.parseDouble(change) * 100) / 100;
+      change = String.format("%.2f", round);
+      StringBuffer changeBuffer = new StringBuffer(change);
+      changeBuffer.insert(0, weight);
+      changeBuffer.append(ampersand);
+      change = changeBuffer.toString();
     }
-    change = change.substring(1, change.length());
-    double round = (double) Math.round(Double.parseDouble(change) * 100) / 100;
-    change = String.format("%.2f", round);
-    StringBuffer changeBuffer = new StringBuffer(change);
-    changeBuffer.insert(0, weight);
-    changeBuffer.append(ampersand);
-    change = changeBuffer.toString();
     return change;
   }
 
   public static ContentValues buildBatchOperation(JSONObject jsonObject){
     ContentValues values = new ContentValues();
     try {
+
+      String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
       String change = jsonObject.getString("Change");
       values.put(StockContract.StockEntry.COLUMN_STOCK_SYMBOL, jsonObject.getString("symbol"));
+      values.put(StockContract.StockEntry.COLUMN_TIME, currentDateTimeString);
       values.put(StockContract.StockEntry.COLUMN_BIDPRICE, truncateBidPrice(jsonObject.getString("Bid")));
-      values.put(StockContract.StockEntry.COLUMN_PERCENT_CHANGE,truncateChange(
-              jsonObject.getString("ChangeinPercent"), true));
+      values.put(StockContract.StockEntry.COLUMN_PERCENT_CHANGE, jsonObject.getString("ChangeinPercent"));
       values.put(StockContract.StockEntry.COLUMN_CHANGE,truncateChange(change, false));
       values.put(StockContract.StockEntry.COLUMN_ISCURRENT, 1);
 

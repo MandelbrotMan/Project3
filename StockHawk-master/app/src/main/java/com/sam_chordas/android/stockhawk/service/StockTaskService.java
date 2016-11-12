@@ -129,6 +129,7 @@ public class StockTaskService extends GcmTaskService{
        }
         ArrayList<ContentValues> valuesArrayList = Utils.quoteJsonToContentVals(getResponse,mContext);
         ContentValues fromJson[] = new ContentValues[valuesArrayList.size()];
+        Log.v("Size of Return :", Integer.toString(valuesArrayList.size()));
         fromJson = valuesArrayList.toArray(fromJson);
         mContext.getContentResolver().bulkInsert(StockContract.StockEntry.CONTENT_URI, fromJson
              );

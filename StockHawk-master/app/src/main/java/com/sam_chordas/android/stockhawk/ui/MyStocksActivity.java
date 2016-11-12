@@ -97,7 +97,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     fab.attachToRecyclerView(recyclerView);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-       /* if (isConnected){
+        if (isConnected){
           new MaterialDialog.Builder(mContext).title(R.string.symbol_search)
               .content(R.string.content_test)
               .inputType(InputType.TYPE_CLASS_TEXT)
@@ -105,7 +105,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                 @Override public void onInput(MaterialDialog dialog, CharSequence input) {
                   // On FAB click, receive user input. Make sure the stock doesn't already exist
                   // in the DB and proceed accordingly
-                  Cursor c = getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
+                  Cursor c = getContentResolver().query(StockContract.StockEntry.CONTENT_URI,
                       new String[] { QuoteColumns.SYMBOL }, QuoteColumns.SYMBOL + "= ?",
                       new String[] { input.toString() }, null);
                   if (c.getCount() != 0) {
@@ -127,21 +127,11 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
               .show();
         } else {
           networkToast();
-        }*/
+        }
         ContentValues values = new ContentValues();
           String change = "Test";
-/*        StockContract.StockEntry.COLUMN_STOCK_SYMBOL + " TEXT NOT NULL, " +
-                StockContract.StockEntry.COLUMN_NAME + " TEXT NOT NULL, " +
-                StockContract.StockEntry.COLUMN_TIME + " TEXT NOT NULL, " +
-                StockContract.StockEntry.COLUMN_PERCENT_CHANGE + " TEXT NOT NULL, " +
-                StockContract.StockEntry.COLUMN_CHANGE + " TEXT NOT NULL," +
-                StockContract.StockEntry.COLUMN_BIDPRICE + " TEXT NOT NULL," +
-                StockContract.StockEntry.COLUMN_CREATED + " TEXT NOT NULL," +
-                StockContract.StockEntry.COLUMN_ISUP + " INTEGER NOT NULL," +
-                StockContract.StockEntry.COLUMN_ISCURRENT + " INTEGER NOT NULL " +*/
-          values.put(StockContract.StockEntry.COLUMN_CREATED, "Test");
+         // values.put(StockContract.StockEntry.COLUMN_CREATED, "Test");
           values.put(StockContract.StockEntry.COLUMN_TIME, "Test");
-          values.put(StockContract.StockEntry.COLUMN_NAME, "Test");
           values.put(StockContract.StockEntry.COLUMN_STOCK_SYMBOL, "Test");
           values.put(StockContract.StockEntry.COLUMN_BIDPRICE, "Test");
           values.put(StockContract.StockEntry.COLUMN_PERCENT_CHANGE,"Test");
@@ -230,7 +220,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     // This narrows the return to only the stocks that are most current.
     return new CursorLoader(this, StockContract.StockEntry.CONTENT_URI,
         new String[]{ StockContract.StockEntry._ID, StockContract.StockEntry.COLUMN_STOCK_SYMBOL, StockContract.StockEntry.COLUMN_BIDPRICE,
-                StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_ISUP},
+                StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_PERCENT_CHANGE, StockContract.StockEntry.COLUMN_ISUP},
             StockContract.StockEntry.COLUMN_ISCURRENT + " = ?",
         new String[]{"1"},
         null);

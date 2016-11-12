@@ -28,7 +28,7 @@ public class StockDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 2;
 
-    static final String DATABASE_NAME = "movie.db";
+    static final String DATABASE_NAME = "stock.db";
 
     public StockDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,13 +40,12 @@ public class StockDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_STOCK_TABLE = "CREATE TABLE " + StockEntry.TABLE_NAME + " (" +
                 StockEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 StockEntry.COLUMN_STOCK_SYMBOL + " TEXT NOT NULL, " +
-                StockEntry.COLUMN_NAME + " TEXT NOT NULL, " +
                 StockEntry.COLUMN_TIME + " TEXT NOT NULL, " +
                 StockEntry.COLUMN_PERCENT_CHANGE + " TEXT NOT NULL, " +
                 StockEntry.COLUMN_CHANGE + " TEXT NOT NULL," +
                 StockEntry.COLUMN_BIDPRICE + " TEXT NOT NULL," +
-                StockEntry.COLUMN_CREATED + " TEXT NOT NULL," +
                 StockEntry.COLUMN_ISUP + " INTEGER NOT NULL," +
+                //Is current is used to filter activities
                 StockEntry.COLUMN_ISCURRENT + " INTEGER NOT NULL " +
                 ");";
         sqLiteDatabase.execSQL(SQL_CREATE_STOCK_TABLE);
