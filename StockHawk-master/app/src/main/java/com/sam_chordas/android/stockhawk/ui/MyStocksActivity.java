@@ -1,7 +1,6 @@
 package com.sam_chordas.android.stockhawk.ui;
 
 import android.app.LoaderManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -16,10 +15,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.sam_chordas.android.stockhawk.R;
@@ -53,6 +54,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
   private QuoteCursorAdapter mCursorAdapter;
   private Context mContext;
   private Cursor mCursor;
+  public final String SendSymbol = "Stock_id";
   boolean isConnected;
 
   @Override
@@ -74,23 +76,30 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
       mServiceIntent.putExtra("tag", "init");
       if (isConnected){
         startService(mServiceIntent);
+
       } else{
         networkToast();
       }
     }
-    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
 
     mCursorAdapter = new QuoteCursorAdapter(this, null);
+    recyclerView.setAdapter(mCursorAdapter);
     recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this,
             new RecyclerViewItemClickListener.OnItemClickListener() {
               @Override public void onItemClick(View v, int position) {
-                //TODO:
-                // do something on item click
+                Intent goTo = new Intent(getBaseContext(), DetailActivity.class);
+               TextView textView = (TextView) v.findViewById(R.id.stock_symbol);
+                Log.d("test",textView.getText().toString());
+                String symbol = (String) textView.getText();
+                  goTo.putExtra(SendSymbol, symbol);
+                  startActivity(goTo);
+
               }
             }));
-    recyclerView.setAdapter(mCursorAdapter);
+
 
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -128,17 +137,6 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         } else {
           networkToast();
         }
-        ContentValues values = new ContentValues();
-          String change = "Test";
-         // values.put(StockContract.StockEntry.COLUMN_CREATED, "Test");
-          values.put(StockContract.StockEntry.COLUMN_TIME, "Test");
-          values.put(StockContract.StockEntry.COLUMN_STOCK_SYMBOL, "Test");
-          values.put(StockContract.StockEntry.COLUMN_BIDPRICE, "Test");
-          values.put(StockContract.StockEntry.COLUMN_PERCENT_CHANGE,"Test");
-          values.put(StockContract.StockEntry.COLUMN_CHANGE,"Test");
-          values.put(StockContract.StockEntry.COLUMN_ISCURRENT, 1);
-          values.put(StockContract.StockEntry.COLUMN_ISUP, 0);
-          getBaseContext().getContentResolver().insert(StockContract.StockEntry.CONTENT_URI, values);
 
       }
     });
@@ -149,7 +147,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 
     mTitle = getTitle();
     if (isConnected){
-      long period = 3600L;
+      long period = 60L;
       long flex = 10L;
       String periodicTag = "periodic";
 
@@ -221,9 +219,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     return new CursorLoader(this, StockContract.StockEntry.CONTENT_URI,
         new String[]{ StockContract.StockEntry._ID, StockContract.StockEntry.COLUMN_STOCK_SYMBOL, StockContract.StockEntry.COLUMN_BIDPRICE,
                 StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_PERCENT_CHANGE, StockContract.StockEntry.COLUMN_ISUP},
-            StockContract.StockEntry.COLUMN_ISCURRENT + " = ?",
-        new String[]{"1"},
-        null);
+            null, null, null);
   }
 
   @Override

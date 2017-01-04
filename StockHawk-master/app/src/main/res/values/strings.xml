@@ -1,18 +1,20 @@
 <resources>
-  <string name="app_name">Stock Hawk</string>
+    <string name="app_name">Stock Hawk</string>
 
-  <string name="action_example">Example action</string>
+    <string name="action_example">Example action</string>
 
-  <string name="action_settings">Settings</string>
-  <string name="action_change_units">Change Units</string>
-  <string name="symbol_search">Symbol Search</string>
-  <string name="content_test">Search for a Stock Symbol</string>
-  <string name="input_hint">FB</string>
-  <string name="input_prefill"></string>
-  <string name="network_toast">Uh-oh! This app requires an internet connection</string>
-  <string name="activity_detail"> Details </string>
-  <string name="add_button">Search new stock button</string>
-  <string name="ph_percent_change" translatable="false">100%</string>
-  <string name="ph_default_stock"> GOOG</string>
-  <string name="ph_value" translatable="false">1000.00</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_change_units">Change Units</string>
+    <string name="symbol_search">Symbol Search</string>
+    <string name="content_test">Search for a Stock Symbol</string>
+    <string name="input_hint">FB</string>
+    <string name="input_prefill"></string>
+    <string name="network_toast">Uh-oh! This app requires an internet connection</string>
+    <string name="activity_detail"> Details </string>
+    <string name="add_button">Search new stock button</string>
+    <string name="ph_percent_change" translatable="false">100%</string>
+    <string name="ph_default_stock"> GOOG</string>
+    <string name="ph_value" translatable="false">1000.00</string>
+    <string name="sync_account_type">sam_chordas.example.com</string>
+    <string name="content_authority">sam_chordas.android.stockhawk</string>
 </resources>

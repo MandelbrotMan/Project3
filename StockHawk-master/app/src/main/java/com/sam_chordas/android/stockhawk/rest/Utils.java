@@ -1,11 +1,22 @@
 package com.sam_chordas.android.stockhawk.rest;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.ContentProvider;
 import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SyncRequest;
+import android.content.res.Resources;
 import android.database.Cursor;
 
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -81,8 +92,13 @@ public class Utils {
 
 
   public static String truncateBidPrice(String bidPrice){
-    bidPrice = String.format("%.2f", Float.parseFloat(bidPrice));
-    return bidPrice;
+    if(!bidPrice.equals("null")) {
+      bidPrice = String.format("%.2f", Float.parseFloat(bidPrice));
+      return bidPrice;
+    }else{
+     bidPrice = "No Data";
+      return bidPrice;
+    }
   }
 
   public static String truncateChange(String change, boolean isPercentChange){
@@ -137,6 +153,7 @@ public class Utils {
     }
     return change;
   }
+
 
 
 }
