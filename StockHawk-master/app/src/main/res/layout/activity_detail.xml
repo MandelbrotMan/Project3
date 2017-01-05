@@ -13,6 +13,12 @@
     tools:context="com.sam_chordas.android.stockhawk.ui.DetailActivity"
     android:orientation="vertical"
     >
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:id="@+id/title_editText"/>
 
 <FrameLayout
     android:id="@+id/chart_container"
