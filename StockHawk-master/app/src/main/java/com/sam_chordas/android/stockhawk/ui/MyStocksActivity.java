@@ -221,7 +221,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     CursorLoader loader = new CursorLoader(this, StockContract.StockEntry.CONTENT_URI,
             new String[]{StockContract.StockEntry._ID,StockContract.StockEntry.COLUMN_STOCK_SYMBOL  , StockContract.StockEntry.COLUMN_BIDPRICE,
                     StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_PERCENT_CHANGE, StockContract.StockEntry.COLUMN_ISUP},
-            Selection , null, null);
+            Selection2, new String[]{String.valueOf(StockContract.CURRENT)}, null);
     return loader;
   }
   @Override
