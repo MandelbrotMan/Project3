@@ -45,13 +45,15 @@ public class StockContract {
     // At least, let's hope not.  Don't be that dev, reader.  Don't be that dev.
     //1.
     public static final String PATH_STOCK = "stock";
-
+    public static final int CURRENT = 1;
+    public static final int NOTCURRENT = 0;
 
 
     public static final class StockEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_STOCK).build();
+
 
         public static final String CONTENT_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_STOCK;

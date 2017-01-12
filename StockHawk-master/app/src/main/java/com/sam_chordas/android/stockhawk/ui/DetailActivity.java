@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sam_chordas.android.stockhawk.R;
@@ -31,6 +33,21 @@ public class DetailActivity extends AppCompatActivity {
 
         EditText text = (EditText) findViewById(R.id.title_editText);
         text.setOnKeyListener(onSoftKeyboardDonePress);
+        text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // do what action you want
+                    Toast.makeText(DetailActivity.this, "checking event", Toast.LENGTH_LONG).show();
+                }
+
+                return false;
+            }
+
+
+        });
 
 
 

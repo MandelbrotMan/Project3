@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cba4a7c2-9912-4943-9dc4-dc368cd44f64" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StockHawk-master/app/src/main/java/com/sam_chordas/android/stockhawk/rest/Utils.java" afterPath="$PROJECT_DIR$/StockHawk-master/app/src/main/java/com/sam_chordas/android/stockhawk/rest/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StockHawk-master/app/src/main/java/com/sam_chordas/android/stockhawk/ui/DetailActivity.java" afterPath="$PROJECT_DIR$/StockHawk-master/app/src/main/java/com/sam_chordas/android/stockhawk/ui/DetailActivity.java" />
     </list>
     <ignored path="mystockhawk.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,10 +60,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -76,6 +74,10 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -83,7 +85,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../project2/MovieApp_Udacity_RaymondLian" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="true" />
   </component>
   <component name="RunManager">

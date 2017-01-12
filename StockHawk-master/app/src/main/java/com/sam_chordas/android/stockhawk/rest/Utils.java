@@ -109,12 +109,16 @@ public class Utils {
       change = change.substring(0, change.length() - 1);
     }else {
       change = change.substring(1, change.length());
-      double round = (double) Math.round(Double.parseDouble(change) * 100) / 100;
-      change = String.format("%.2f", round);
-      StringBuffer changeBuffer = new StringBuffer(change);
-      changeBuffer.insert(0, weight);
-      changeBuffer.append(ampersand);
-      change = changeBuffer.toString();
+      try {
+        double round = (double) Math.round(Double.parseDouble(change) * 100) / 100;
+        change = String.format("%.2f", round);
+        StringBuffer changeBuffer = new StringBuffer(change);
+        changeBuffer.insert(0, weight);
+        changeBuffer.append(ampersand);
+        change = changeBuffer.toString();
+      }catch (NumberFormatException e){
+
+      }
     }
     return change;
   }

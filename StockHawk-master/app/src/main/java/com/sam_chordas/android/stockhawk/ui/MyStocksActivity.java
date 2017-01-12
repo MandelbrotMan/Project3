@@ -214,14 +214,16 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
   }
 
   @Override
-  public Loader<Cursor> onCreateLoader(int id, Bundle args){
+  public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     // This narrows the return to only the stocks that are most current.
-    return new CursorLoader(this, StockContract.StockEntry.CONTENT_URI,
-        new String[]{ StockContract.StockEntry._ID, StockContract.StockEntry.COLUMN_STOCK_SYMBOL, StockContract.StockEntry.COLUMN_BIDPRICE,
-                StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_PERCENT_CHANGE, StockContract.StockEntry.COLUMN_ISUP},
-            null, null, null);
+    String Selection = "(" + StockContract.StockEntry.COLUMN_STOCK_SYMBOL + " NOT NULL) GROUP BY (" + StockContract.StockEntry.COLUMN_STOCK_SYMBOL + ")";
+    String Selection2 = StockContract.StockEntry.COLUMN_ISCURRENT + "=?";
+    CursorLoader loader = new CursorLoader(this, StockContract.StockEntry.CONTENT_URI,
+            new String[]{StockContract.StockEntry._ID,StockContract.StockEntry.COLUMN_STOCK_SYMBOL  , StockContract.StockEntry.COLUMN_BIDPRICE,
+                    StockContract.StockEntry.COLUMN_CHANGE, StockContract.StockEntry.COLUMN_PERCENT_CHANGE, StockContract.StockEntry.COLUMN_ISUP},
+            Selection , null, null);
+    return loader;
   }
-
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor data){
     mCursorAdapter.swapCursor(data);

@@ -101,8 +101,9 @@ public class StockTaskService extends GcmTaskService {
     if (params.getTag().equals("init") || params.getTag().equals("periodic")) {
       Log.v("Periodic Sync called", "Tested");
       isUpdate = true;
+      String Selection = "(" + StockContract.StockEntry.COLUMN_STOCK_SYMBOL + " NOT NULL) GROUP BY (" + StockContract.StockEntry.COLUMN_STOCK_SYMBOL + ")";
       initQueryCursor = mContext.getContentResolver().query(StockContract.StockEntry.CONTENT_URI,
-              new String[]{StockContract.StockEntry.COLUMN_STOCK_SYMBOL}, null,
+              new String[]{StockContract.StockEntry.COLUMN_STOCK_SYMBOL}, Selection,
               null, null);
       if(initQueryCursor.moveToFirst() == false){
         initQueryCursor = null;
@@ -176,6 +177,7 @@ public class StockTaskService extends GcmTaskService {
         ContentValues fromJson[] = new ContentValues[valuesArrayList.size()];
         Log.v("Size of Return :", Integer.toString(valuesArrayList.size()));
         fromJson = valuesArrayList.toArray(fromJson);
+
         mContext.getContentResolver().bulkInsert(StockContract.StockEntry.CONTENT_URI, fromJson
         );
         valid = Utils.valid;

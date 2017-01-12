@@ -41,7 +41,6 @@ public class StockProvider extends ContentProvider {
 
         MovieQueryBuilder.setTables(
                 StockContract.StockEntry.TABLE_NAME
-
                        );
 
 
