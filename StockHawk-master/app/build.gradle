@@ -27,6 +27,7 @@ repositories {
 }
 
 dependencies {
+
   compile 'org.hogel:line-chart-view:0.2.1-SNAPSHOT'
   compile 'org.hogel:line-chart-view:0.2.0'
   compile 'com.google.android.gms:play-services-gcm:8.4.0'

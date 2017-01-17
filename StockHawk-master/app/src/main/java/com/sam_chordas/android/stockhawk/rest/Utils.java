@@ -41,6 +41,7 @@ public class Utils {
 
   public static boolean showPercent = true;
   public static boolean valid = false;
+  public static String noData = "No Data";
 
   public static ArrayList quoteJsonToContentVals(String JSON, Context context){
     ArrayList<ContentValues> batchOperations = new ArrayList<>();
@@ -96,7 +97,7 @@ public class Utils {
       bidPrice = String.format("%.2f", Float.parseFloat(bidPrice));
       return bidPrice;
     }else{
-     bidPrice = "No Data";
+     bidPrice = noData;
       return bidPrice;
     }
   }

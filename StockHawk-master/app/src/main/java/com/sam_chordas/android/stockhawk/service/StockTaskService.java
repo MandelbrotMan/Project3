@@ -166,11 +166,13 @@ public class StockTaskService extends GcmTaskService {
         result = GcmNetworkManager.RESULT_SUCCESS;
         ContentValues contentValues = new ContentValues();
         // update ISCURRENT to 0 (false) so new data is current
+        //Update new info String
+        String filter =  StockContract.StockEntry.COLUMN_ISCURRENT + " =?";
         if (isUpdate) {
           contentValues.put(QuoteColumns.ISCURRENT, 0);
 
           mContext.getContentResolver().update(StockContract.StockEntry.CONTENT_URI, contentValues,
-                  null, null);
+                  filter, new String[]{String.valueOf(StockContract.CURRENT)});
 
         }
         ArrayList<ContentValues> valuesArrayList = Utils.quoteJsonToContentVals(getResponse, mContext);
