@@ -49,7 +49,6 @@
             android:authorities="com.sam_chordas.android.stockhawk.data.StockProvider"
             android:exported="false" />
 
-        <activity android:name=".ui.DateLineChartActivity"></activity>
     </application>
     <receiver android:name="StockHawkWidgetProvider" >
         <intent-filter>
