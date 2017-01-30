@@ -50,6 +50,12 @@
             android:exported="false" />
 
     </application>
+    <activity android:name=".StockHawkWidgetConfigure">
+        <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+        </intent-filter>
+    </activity>
+
     <receiver android:name="StockHawkWidgetProvider" >
         <intent-filter>
             <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

@@ -34,8 +34,8 @@ public abstract class DemoBase extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mTfRegular = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
-        mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
+       // mTfRegular = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+      //  mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
     }
 
     protected float getRandom(float range, float startsfrom) {
