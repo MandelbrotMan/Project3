@@ -8,11 +8,11 @@
         android:id="@+id/chart1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/seekBar1"
+        android:layout_above="@+id/FrequencySeekBar"
         />
 
         <SeekBar
-            android:id="@+id/seekBar2"
+            android:id="@+id/TimeSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -20,14 +20,15 @@
             android:layout_margin="8dp"
             android:layout_toLeftOf="@+id/textViewDateRange"
             android:layout_marginRight="5dp"
-            android:paddingBottom="12dp" />
+            android:paddingBottom="12dp"
+            android:contentDescription=""/>
 
 
         <SeekBar
-            android:id="@+id/seekBar1"
+            android:id="@+id/FrequencySeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/seekBar2"
+            android:layout_above="@+id/TimeSeekBar"
             android:layout_margin="8dp"
             android:layout_marginBottom="35dp"
             android:layout_toLeftOf="@+id/textViewFrequency"
@@ -37,17 +38,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Search Frequency"
-            android:layout_above="@id/seekBar1"/>
+            android:layout_above="@id/FrequencySeekBar"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time Range"
-            android:layout_above="@id/seekBar2"/>
+            android:layout_above="@id/TimeSeekBar"/>
         <TextView
             android:id="@+id/textViewFrequency"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/seekBar1"
+            android:layout_alignBottom="@+id/FrequencySeekBar"
             android:layout_alignParentRight="true"
             android:text="500"
             android:layout_marginBottom="15dp"
@@ -59,7 +60,7 @@
             android:id="@+id/textViewDateRange"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/seekBar2"
+            android:layout_alignBottom="@+id/TimeSeekBar"
             android:layout_alignParentRight="true"
             android:text="500"
             android:layout_marginBottom="15dp"

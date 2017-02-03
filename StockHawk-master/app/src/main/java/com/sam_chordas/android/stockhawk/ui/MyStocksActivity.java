@@ -1,6 +1,8 @@
 package com.sam_chordas.android.stockhawk.ui;
 
 import android.app.LoaderManager;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -20,6 +22,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -38,7 +41,7 @@ import com.google.android.gms.gcm.Task;
 import com.melnykov.fab.FloatingActionButton;
 import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
 
-public class MyStocksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MyStocksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
   /**
    * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -63,6 +66,8 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     mContext = this;
     ConnectivityManager cm =
         (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
 
     NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
     isConnected = activeNetwork != null &&
@@ -147,7 +152,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 
     mTitle = getTitle();
     if (isConnected){
-      long period = 600L;
+      long period = 1200L;
       long flex = 10L;
       String periodicTag = "periodic";
 
@@ -164,6 +169,8 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
       // Schedule task with tag "periodic." This ensure that only the stocks present in the DB
       // are updated.
       GcmNetworkManager.getInstance(this).schedule(periodicTask);
+    }else{
+      Log.v("Error Connecting", "Test");
     }
   }
 
@@ -241,5 +248,19 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
     toast.show();
   }
+  static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                              int appWidgetId) {
 
+    //CharSequence widgetText = context.getString(R.string.appwidget_text);
+    // Construct the RemoteViews object
+    RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_info);
+    //views.setTextViewText(R.id.appwidget_text, widgetText);
+    // Create an Intent to launch MainActivity
+    Intent intent = new Intent(context, MyStocksActivity.class);
+    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+    views.setOnClickPendingIntent(R.id.widget_button,pendingIntent);
+
+    // Instruct the widget manager to update the widget
+    appWidgetManager.updateAppWidget(appWidgetId, views);
+  }
 }

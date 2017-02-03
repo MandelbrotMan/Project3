@@ -99,7 +99,9 @@ public class StockTaskService extends GcmTaskService {
       e.printStackTrace();
     }
     if (params.getTag().equals("init") || params.getTag().equals("periodic")) {
-      Log.v("Periodic Sync called", "Tested");
+      if(params.getTag().equals("periodic")) {
+        Log.v("Periodic Sync called", "Tested");
+      }
       isUpdate = true;
       String Selection = "(" + StockContract.StockEntry.COLUMN_STOCK_SYMBOL + " NOT NULL) GROUP BY (" + StockContract.StockEntry.COLUMN_STOCK_SYMBOL + ")";
       initQueryCursor = mContext.getContentResolver().query(StockContract.StockEntry.CONTENT_URI,

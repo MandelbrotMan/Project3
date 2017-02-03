@@ -48,20 +48,17 @@
             android:name=".data.StockProvider"
             android:authorities="com.sam_chordas.android.stockhawk.data.StockProvider"
             android:exported="false" />
+        <receiver android:name=".ui.StockHawkWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
 
     </application>
-    <activity android:name=".StockHawkWidgetConfigure">
-        <intent-filter>
-            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
-        </intent-filter>
-    </activity>
+   
 
-    <receiver android:name="StockHawkWidgetProvider" >
-        <intent-filter>
-            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-        </intent-filter>
-        <meta-data android:name="android.appwidget.provider"
-            android:resource="@xml/widget_info" />
-    </receiver>
+
 
 </manifest>

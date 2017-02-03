@@ -6,16 +6,13 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.PointF;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -41,7 +38,6 @@ import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.Task;
 import com.sam_chordas.android.stockhawk.MyMarkerView;
 import com.sam_chordas.android.stockhawk.R;
-import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.StockContract;
 import com.sam_chordas.android.stockhawk.service.StockIntentService;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
@@ -84,11 +80,9 @@ public class DetailActivity  extends DemoBase implements SeekBar.OnSeekBarChange
 
 
 
-
-
             mChartView = (LineChart) findViewById(R.id.chart1);
-            mBarSetFrequency = (SeekBar) findViewById(R.id.seekBar1);
-            mBarRangeScale = (SeekBar) findViewById(R.id.seekBar2);
+            mBarSetFrequency = (SeekBar) findViewById(R.id.FrequencySeekBar);
+            mBarRangeScale = (SeekBar) findViewById(R.id.TimeSeekBar);
             mDateRangeText = (TextView) findViewById(R.id.textViewDateRange);
             mFrequencyText = (TextView) findViewById(R.id.textViewFrequency);
 
@@ -147,7 +141,7 @@ public class DetailActivity  extends DemoBase implements SeekBar.OnSeekBarChange
             isConnected = activeNetwork != null &&
                     activeNetwork.isConnectedOrConnecting();
             if (isConnected){
-                long period = 60L;
+                long period = 600L;
                 long flex = 10L;
                 String periodicTag = "periodic";
 
